@@ -1,10 +1,14 @@
 #!/bin/sh
 
+LOG_FILE=/var/log/update_apt.log
+
+exec >> ${LOG_FILE} 2>&1
+
 HLine="##################################################################################################"
 
 echo ${HLine}
 echo
-date "+          START UBUNTU UPDATE PROCESS          %Y-%m-%dT%H:%M:%S"
+date "+          START PACKAGE UPDATE PROCESS          %Y-%m-%dT%H:%M:%S"
 echo
 echo ${HLine}
 
