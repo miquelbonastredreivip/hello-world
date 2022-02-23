@@ -19,7 +19,7 @@ MAIN="master"
 
 date &&
   git status &&
-  echo FETCH: && git fetch &&
+  echo FETCH: && git fetch --prune &&
   echo PULL current branch: && git pull &&
   echo PULL ${MAIN}: && git pull origin ${MAIN}:${MAIN}
 

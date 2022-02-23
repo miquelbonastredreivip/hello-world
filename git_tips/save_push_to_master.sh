@@ -25,7 +25,7 @@ MAIN="master"
 
 date &&
 echo "ACTUALITZEM LOCAL REPO:" &&
-  echo fetch: && git fetch &&
+  echo fetch: && git fetch --prune &&
   echo pull ${MAIN}: && git pull origin ${MAIN}:${MAIN} &&
 
 echo "REBASE FROM ${MAIN}:" &&
