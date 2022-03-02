@@ -51,5 +51,6 @@ echo "  git fetch && git pull"
 echo "Branch cleaning:"
 echo " - delete local : git branch -d BRANCH"
 echo " - delete remote: git push origin --delete BRANCH"
+echo " - ignore remote: git branch --unset-upstream [BRANCH]
 echo " - delete tracking: git remote prune origin"
 
