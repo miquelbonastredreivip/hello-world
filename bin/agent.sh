@@ -1,5 +1,9 @@
 #!/bin/echo This file must be run in the same process with "." (source)
 #
+# Author: @mbonastre https://github.com/mbonastre
+#
+# Updated: 2022-03-07
+#
 # This script allows easy use of "ssh-agent" from any terminal.
 # Works in Linux and MacOS.
 #
@@ -22,11 +26,11 @@
 # In my case: id_rsa.
 #
 #
-# To use this script, add these lines at the end of ".bashrc"
+# To use this script, add these lines at the end of ".profile"
 # (or equivalent file; I have only tested it in bash):
 #
-#  if [ -x ~/bin/agent.sh ] ; then
-#    . ~/bin/agent.sh
+#  if [ -x ${HOME}/bin/agent.sh ] ; then
+#    . ${HOME}/bin/agent.sh
 #  fi
 #
 
@@ -35,22 +39,22 @@
 #  - If socket invalid, remove variables file (it is stale)
 #
 
-if [ -f ~/.ssh/ssh_auth_env ]; then
-   .  ~/.ssh/ssh_auth_env
-   [ -S "${SSH_AUTH_SOCK}" ] || rm ~/.ssh/ssh_auth_env
+if [ -f ${HOME}/.ssh/ssh_auth_env ]; then
+   .  ${HOME}/.ssh/ssh_auth_env
+   [ -S "${SSH_AUTH_SOCK}" ] || rm ${HOME}/.ssh/ssh_auth_env
 fi
 
 # Second step:
 #  - If ssh-agent is not running launch it
 #  - Store and load variables
 #  - Set TTL (maximum time to ask for password again)
-#      130000 ~ 36 hores (asks at the begining of work day, every other day)
-#      1300000 ~ 15 dies
-#      2600000 ~ 30 dies (I use it on holidays if I leave scheduled processes)
+#      130000 ${HOME} 36 hores (asks at the begining of work day, every other day)
+#      1300000 ${HOME} 15 dies
+#      2600000 ${HOME} 30 dies (I use it on holidays if I leave scheduled processes)
 #
-if [ ! -f ~/.ssh/ssh_auth_env ]; then
-  ssh-agent -t 130000 > ~/.ssh/ssh_auth_env
-  .  ~/.ssh/ssh_auth_env
+if [ ! -f ${HOME}/.ssh/ssh_auth_env ]; then
+  ssh-agent -t 130000 > ${HOME}/.ssh/ssh_auth_env
+  .  ${HOME}/.ssh/ssh_auth_env
 fi
 
 
@@ -64,7 +68,7 @@ fi
 #
 ssh-add -l || ssh-add
 
-# Possible improbements:
+# Possible improvements:
 #  - Currently, the password is requested in the terminal.
 #    With proper configuration, an X11 window could request it.
 #    Look at "SSH_ASKPASS" variable.
